@@ -1,0 +1,224 @@
+[
+  {
+    "version": "2.3.1",
+    "date": "2026-11-16",
+    "title": "Reliable saves and a smaller request reader",
+    "changes": [
+      "Documented the selected React/Vite, Node.js/Express and Tailwind migration plan for the whole app, including visual-preservation checks; implementation has not started.",
+      "Fixed Windows launcher escaping so Docker Desktop can start automatically; clarified that --check does not start services.",
+      "Fixed manual bookmarks silently succeeding when a pending automatic save loses authorization or conflicts with another device.",
+      "Skip malformed EPUB image URLs while keeping readable chapters and valid local illustrations.",
+      "Share request-size enforcement between JSON writes and binary uploads, and reject invalid JSON media types.",
+      "Added regression checks and recorded the code review, verification, and remaining limits."
+    ],
+    "notes": "docs/versions/2026-11-16-review-refactor.md"
+  },
+  {
+    "version": "2.3.0",
+    "date": "2026-11-07",
+    "title": "A voice for the reading room",
+    "changes": [
+      "Added free local-device read-aloud with playback controls, voice/speed selection, word or sentence highlights, and optional follow scrolling.",
+      "Read across pages and save spoken positions while stopping old playback on manual navigation.",
+      "Added PDF text overlays for selectable-text reading and Left, Center, Right, and Justify novel alignment.",
+      "Save alignment and voice preferences per book in PostgreSQL."
+    ],
+    "notes": "docs/versions/2026-11-07-read-aloud.md"
+  },
+  {
+    "version": "2.2.0",
+    "date": "2026-11-07",
+    "title": "A reader that remembers your place",
+    "changes": [
+      "Removed shelf Rename buttons while retaining title/folder editing inside the reader.",
+      "Added novel-only font choices saved with each book's reading preferences.",
+      "Automatically save page and viewport/text positions, with immediate manual saving and latest-save priority.",
+      "Prepared a lightweight browser-voice TTS plan for approval; playback is not implemented yet."
+    ],
+    "notes": "docs/versions/2026-11-07-reader-preferences-autosave.md"
+  },
+  {
+    "version": "2.1.3",
+    "date": "2026-11-07",
+    "title": "Whole sentences and familiar covers",
+    "changes": [
+      "Keep EPUB sentences together across page breaks, including inline formatting.",
+      "Added shelf Rename controls that save novel titles in PostgreSQL.",
+      "Preview embedded EPUB covers or the first PDF page on hover or keyboard focus."
+    ],
+    "notes": "docs/versions/2026-11-07-sentences-covers.md"
+  },
+  {
+    "version": "2.1.2",
+    "date": "2026-11-07",
+    "title": "A title and a page to return to",
+    "changes": [
+      "Paginate EPUB text and illustrations with continuous Title - Page navigation.",
+      "Use table-of-contents titles only, including anchors within a source file.",
+      "Keep page controls and a next-title jump below the text, with stable page bookmarks."
+    ],
+    "notes": "docs/versions/2026-11-07-epub-pages.md"
+  },
+  {
+    "version": "2.1.1",
+    "date": "2026-11-06",
+    "title": "Chapter names and one more chapter",
+    "changes": [
+      "Read EPUB chapter titles from EPUB 3 navigation, EPUB 2 NCX, or chapter headings.",
+      "Added previous/next chapter controls below the reading text, with page controls for PDF.",
+      "Preserved original reading order and existing bookmarks."
+    ],
+    "notes": "docs/versions/2026-11-06-epub-navigation.md"
+  },
+  {
+    "version": "2.1.0",
+    "date": "2026-11-06",
+    "title": "A reading room for whole series",
+    "changes": [
+      "Added private PDF and EPUB uploads, original-file downloads, and format-specific reading controls.",
+      "Added series folders, folder management, and moving or renaming volumes.",
+      "Save PDF page and EPUB section bookmarks and include files and folders in backups."
+    ],
+    "notes": "docs/versions/2026-11-06-novel-library.md"
+  },
+  {
+    "version": "2.0.7",
+    "date": "2026-11-06",
+    "title": "A bigger hello from our mascot",
+    "changes": [
+      "Enlarged the header lettering and Picture Book subtitle.",
+      "Made the mascot substantially larger, with separate space below the logo on smaller screens."
+    ],
+    "notes": "docs/versions/2026-11-06-larger-header.md"
+  },
+  {
+    "version": "2.0.6",
+    "date": "2026-11-06",
+    "title": "A soundtrack for every visitor",
+    "changes": [
+      "Show the owner's Music of the Day to visitors even with a private profile.",
+      "Keep music editing owner-only and clarify public song visibility."
+    ],
+    "notes": "docs/versions/2026-11-06-public-music.md"
+  },
+  {
+    "version": "2.0.5",
+    "date": "2026-11-06",
+    "title": "Open the notebook with one click",
+    "changes": [
+      "Added a Windows launcher for Docker, PostgreSQL, the website, and browser opening.",
+      "Added everyday startup and PostgreSQL table-viewing instructions."
+    ],
+    "notes": "docs/versions/2026-11-06-launcher.md"
+  },
+  {
+    "version": "2.0.4",
+    "date": "2026-11-06",
+    "title": "A fuller corner and a clearer forecast",
+    "changes": [
+      "Keep default profile copy visible when new account fields are empty.",
+      "Added an owner-only editor beside In my little world.",
+      "Fixed the weather loading null-property error and added city/region selection and clearer recovery messages."
+    ],
+    "notes": "docs/versions/2026-11-06-profile-weather.md"
+  },
+  {
+    "version": "2.0.3",
+    "date": "2026-11-06",
+    "title": "Quiet owner access",
+    "changes": [
+      "Moved sign-in to an unlinked owner page and kept remembered session access.",
+      "Hide editing, music inputs, uploads, backups, and trash from public visitors before initialization.",
+      "Keep authenticated server permissions while showing visitors only reading controls."
+    ],
+    "notes": "docs/versions/2026-11-06-owner-controls.md"
+  },
+  {
+    "version": "2.0.2",
+    "date": "2026-11-06",
+    "title": "Clearer music sign-in controls",
+    "changes": [
+      "Allow pasting music links while signed out and explain that saving requires owner sign-in.",
+      "Preserve pasted links when signing in and update controls when a session expires.",
+      "Reject local-file URLs in music covers and links."
+    ],
+    "notes": "docs/versions/2026-11-06-music-access.md"
+  },
+  {
+    "version": "2.0.1",
+    "date": "2026-11-06",
+    "title": "Clearer database migration diagnostics",
+    "changes": [
+      "Report specific database connection and permission errors without exposing credentials.",
+      "Added connection diagnostics and a verified local Compose migration-configuration helper.",
+      "Fixed local migration configuration to use the administrator while preserving the restricted runtime connection."
+    ],
+    "notes": "docs/versions/2026-11-06-migration-diagnostics.md"
+  },
+  {
+    "version": "2.0.0",
+    "date": "2026-11-06",
+    "title": "A notebook with a PostgreSQL home",
+    "changes": [
+      "Added PostgreSQL schema, migrations, restricted database grants, and owner setup commands.",
+      "Moved notebook authoring, imported books, and bookmarks to an authenticated server API.",
+      "Added private defaults, explicit publishing, recoverable trash, and revision conflict checks.",
+      "Added validated transactional imports from legacy browser backups with safe retry receipts.",
+      "Added PostgreSQL/API integration tests and updated setup and reference documentation."
+    ],
+    "notes": "docs/versions/2026-11-06-postgresql.md"
+  },
+  {
+    "version": "1.2.1",
+    "date": "2026-11-05",
+    "title": "Getting a little melody to the pages",
+    "changes": [
+      "Added a YouTube link input and load button to retrieve video title, channel name, and thumbnail.",
+      "Added GET /api/music-info with video-ID validation, JSON responses, and a ten-second upstream timeout.",
+      "Fixed title/artwork updates and preserved the title, channel, thumbnail, and listening URL across reloads and profile edits.",
+      "Replaced inactive playback controls with a Listen on YouTube link and corrected the widget help text.",
+      "Added metadata validation, clear API/storage failure messages, and music persistence/API regression coverage.",
+      "Revised the existing music version note, code reference, and project report to describe the completed fixes and remaining limits."
+    ],
+    "notes": "docs/versions/2026-11-05-music.md"
+  },
+  {
+    "version": "1.2.0",
+    "date": "2026-11-05",
+    "title": "Ordinary HTML again",
+    "changes": [
+      "Moved complete page layouts into normal editable HTML files.",
+      "Moved repeated cards, forms, reader controls, and widget results into shared HTML templates.",
+      "Separated JavaScript behaviour from markup in both browser scripts.",
+      "Preserved saved notebook data and added an HTML editing guide with updated checks."
+    ],
+    "notes": "docs/versions/2026-11-05-html.md"
+  },
+  {
+    "version": "1.1.0",
+    "date": "2026-11-05",
+    "title": "Back to an anime homepage",
+    "changes": [
+      "Reworked the design into a compact 2010-era anime homepage with a gingham frame and pastel directory.",
+      "Restored the jumping multicoloured logo and character-image zoom with keyboard and reduced-motion support.",
+      "Reorganised pages, runtime assets, tests, and archive data into dedicated folders.",
+      "Added desktop, tablet, phone, and touch layouts, including responsive extractor panels.",
+      "Added a complete project report, function reference, and future update plan."
+    ],
+    "notes": "docs/versions/2026-11-05-retro.md"
+  },
+  {
+    "version": "1.0.0",
+    "date": "2026-11-05",
+    "title": "A picture book finds its pages again",
+    "changes": [
+      "Rebuilt the home page around the original fonts, character illustrations, and warm paper palette.",
+      "Added daily notes, blog and story writing, document links, a work board, and a personal anime log.",
+      "Added calendar reminders, optional location-based weather, and local music playback.",
+      "Built a local text-novel library with folder import, reading controls, and bookmarks.",
+      "Preserved the original AI2D page and added notebook backup and restore.",
+      "Added a public-content export for static hosting that excludes the private notebook sections."
+    ],
+    "notes": "docs/versions/2026-11-05.md"
+  }
+]

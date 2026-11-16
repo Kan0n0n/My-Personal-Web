@@ -1,0 +1,28 @@
+/* Keep the surviving extractor’s result components; replace its fixed layout. */
+.tool-wrap { width: min(1050px, calc(100% - 28px)); margin: 22px auto; padding: 16px; border: 1px dashed #9ba474; background: #edf0d9; }
+.tool-nav { display: flex; flex-wrap: wrap; gap: 18px; padding: 7px 10px; margin-bottom: 10px; border: 1px solid var(--line); background: var(--paper); font-size: 13px; }
+.tool-wrap .masthead { min-height: 220px; }
+.backend-note { padding: 12px; margin: 12px 0; background: #fffdf4; border: 1px dotted var(--line); font-size: 13px; overflow-wrap: anywhere; }
+.legacy-tool code { font-size: 12px; }
+.legacy-tool main { margin-top: 12px; }
+.legacy-tool .ai2d-controls { display: flex; align-items: center; justify-content: flex-start; gap: 12px; flex-wrap: wrap; margin: 15px 0; }
+.legacy-tool .custom-file-upload, .legacy-tool .ai2d-analyze-btn { padding: 8px 14px; border: 1px solid var(--line); border-radius: 1px; background: linear-gradient(#fffdfa,#e6edcf); color: var(--ink); font: 15px Overlock, sans-serif; cursor: pointer; margin: 0; box-shadow: none; }
+.legacy-tool #imageInput { display: block; max-width: 300px; font-size: 13px; padding: 6px; }
+.legacy-tool .ai2d-analyze-btn:hover { transform: none; background: #f5dfe0; }
+.legacy-tool .ai2d-status, .legacy-tool .loading-text { font: 15px Overlock, sans-serif; color: var(--rose); }
+.legacy-tool .ai2d-results-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; width: 100%; }
+.legacy-tool .ai2d-result-card, .legacy-tool .ai2d-json-card { min-width: 0; padding: 13px; border: 1px dotted var(--line); border-radius: 0; background: #fffdf5; }
+.legacy-tool .ai2d-result-card h4, .legacy-tool .ai2d-json-card h4 { font: italic 19px Georgia,serif; }
+.legacy-tool .ai2d-json-card pre { font: 13px/1.6 monospace; padding: 10px; border-radius: 0; overflow-wrap: anywhere; }
+.legacy-tool .json-download-btn { font: 14px Overlock,sans-serif; border: 1px solid var(--line); border-radius: 1px; color: var(--ink); background: #e5edcf; }
+.legacy-tool #mynetwork { height: min(65vh,600px) !important; min-height: 280px; border: 1px dotted var(--line) !important; border-radius: 0; }
+.legacy-tool .modal-content-container { width: min(1000px,90vw); height: 80dvh; }
+.legacy-tool .modal-content-image { max-width: 100%; max-height: 100%; }
+.legacy-tool .close { position: absolute; right: 15px; top: 15px; min-width: 44px; min-height: 44px; font-size: 25px; color: #fff; background: #513e37; }
+@media (max-width:700px) {
+  .tool-wrap { width: calc(100% - 16px); padding: 10px; margin: 10px auto; }
+  .legacy-tool .ai2d-results-grid { grid-template-columns: 1fr; }
+  .legacy-tool #imageInput { max-width: 100%; }
+  .legacy-tool .ai2d-controls > * { max-width: 100%; }
+  .tool-nav a { min-height: 40px; display: inline-flex; align-items: center; }
+}

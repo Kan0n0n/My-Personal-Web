@@ -1,0 +1,22 @@
+/* The original letter jump, staggered along the user’s current display name. */
+@keyframes logo-jump {
+  0%, 100% { transform: translateY(0); }
+  45% { transform: translateY(-10px) rotate(-3deg); }
+  70% { transform: translateY(-3px) rotate(2deg); }
+}
+.wordmark:is(:hover, :focus-visible) .logo-char,
+.left-item:is(:hover, :focus-visible) .char {
+  animation: logo-jump .5s ease both;
+  animation-delay: calc(var(--order, 0) * 65ms);
+}
+.mascot-link:is(:hover, :focus-visible) .mascot { transform: scale(1.13) rotate(-3deg); }
+.avatar:hover { transform: scale(1.06); }
+/* Touch has no persistent hover; a press gives the same little response. */
+@media (hover: none) {
+  .wordmark:active .logo-char { animation: logo-jump .5s ease both; animation-delay: calc(var(--order, 0) * 65ms); }
+  .mascot-link:active .mascot { transform: scale(1.1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .mascot-link:is(:hover, :focus-visible, :active) .mascot, .avatar:hover { transform: none; }
+}

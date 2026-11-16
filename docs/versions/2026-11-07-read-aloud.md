@@ -1,0 +1,11 @@
+# Version 2.3.0 — Read aloud and text alignment
+
+Implemented the owner's approved TTS plan using browser/device voices only. Reader controls provide Read aloud, Pause/Resume, Stop, local voice selection, speed, and Follow voice. Playback begins from selected text or the visible reading position and does not autoplay on opening a book. Short utterances avoid buffering whole-book audio. No speech model, API key, cloud speech service, or GPU runtime was added.
+
+Word timing drives range-based highlights when available; sentence highlighting is the explicit fallback. CSS Highlights are used when supported, with lightweight viewport overlays otherwise. Text and bookmark offsets are not rewritten. Page advancement skips EPUB illustration pages and stops at the volume's end. Manual page changes, volume changes, session expiry, and PDF zoom cancel stale speech. Pause/resume restarts the current sentence/chunk to avoid relying on inconsistent platform pause behavior.
+
+PDF pages now include an extracted, positioned text overlay. Read-aloud operates on that layer and reports image-only pages as unavailable without OCR. Extraction order and font/rotation geometry can vary with complex PDFs, so real PDFs still need browser review. Left, Center, Right, and Justify affect novel text only and preserve fixed PDF layout.
+
+Migration 004 adds alignment and speech preferences to reading_progress. Voice/speed/follow preferences and spoken text offsets use the existing serialized, revision-checked saving and backup/import flow. No new audio endpoint or public file access was added.
+
+Validation: 40 frontend/static, 15 database/API, 7 music, 23 reader/cover, 8 autosave, and 15 speech scenarios passed (108 total). Checks cover actual PDF rendering/extraction, selection-based playback, local-only voice filtering and asynchronous voice arrival, word/fallback highlights, playback state, stale-event cancellation, auto advancement/end-of-book, session expiry, spoken-location manual saves, and restored alignment/voice preferences. The local schema migration was applied and the app restarted. The browser access host was unavailable; real audio quality, installed voice behavior, visual highlight placement, and complex-PDF overlays remain unverified interactively.

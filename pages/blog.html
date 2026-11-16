@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Philine’s personal anime web: daily notes, stories, favourite things, and a reading room.">
+    <link rel="icon" href="../assets/images/Philine-P5V6.webp">
+    <link rel="stylesheet" href="../assets/css/site.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <script defer src="../assets/js/picturebook.js"></script>
+    <title>Blog · Philine’s Picture Book</title>
+  </head>
+  <body data-page="blog">
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="site-wrap">
+      <div class="topline">
+        <span>✿ welcome to <span data-profile="name">Philine</span>’s little corner of the internet! ✿</span>
+        <span id="clock">
+        </span>
+      </div>
+      <!-- HEADER: edit the logo, illustration, and banner copy below. -->
+      <header class="masthead">
+        <div class="eyebrow">A personal corner of the world wide web</div>
+        <h1>
+          <a class="wordmark" href="index.html" aria-label="Philine’s Picture Book — home">
+            <span class="wordmark-name" aria-hidden="true">
+              <span class="logo-char" style="--order:0">P</span>
+              <span class="logo-char" style="--order:1">h</span>
+              <span class="logo-char" style="--order:2">i</span>
+              <span class="logo-char" style="--order:3">l</span>
+              <span class="logo-char" style="--order:4">i</span>
+              <span class="logo-char" style="--order:5">n</span>
+              <span class="logo-char" style="--order:6">e</span>
+              <span class="logo-suffix">’s</span>
+            </span>
+            <span class="wordmark-book" aria-hidden="true">Picture Book</span>
+          </a>
+        </h1>
+        <p>Ordinary days, extraordinary stories.<br>A little home, somewhere between the pages.</p>
+        <a class="mascot-link" href="index.html" aria-label="Return home with the book-loving mascot">
+          <img class="mascot" src="../assets/images/rzmcsb_trans_rel.png" alt="A little book-loving character with a walking book">
+        </a>
+        <span class="theme-stamp">✧ handmade on the small web ✧</span>
+      </header>
+      <div class="ticker">✿ &nbsp; You found a quiet corner of the internet. Welcome, wanderer. &nbsp; ✿</div>
+      <div class="layout">
+        <aside class="column left-column">
+          <section class="paper calendar-paper">
+            <div class="paper-title">days to remember <span>❀</span>
+            </div>
+            <div id="calendar">
+              <div class="calendar-bar">
+                <button class="small" data-action="month-prev" aria-label="Previous month">‹</button>
+                <strong>Calendar</strong>
+                <button class="small" data-action="month-next" aria-label="Next month">›</button>
+              </div>
+              <div class="calendar">
+                <!-- JavaScript adds the dates here; keep the weekday labels. -->
+                <span class="day-name">S</span>
+                <span class="day-name">M</span>
+                <span class="day-name">T</span>
+                <span class="day-name">W</span>
+                <span class="day-name">T</span>
+                <span class="day-name">F</span>
+                <span class="day-name">S</span>
+              </div>
+              <p class="calendar-note">✿ Click a day to keep a little reminder.</p>
+            </div>
+          </section>
+          <section class="paper directory">
+            <div class="paper-title">directory <span>✿</span>
+            </div>
+            <nav class="navigation" aria-label="Main navigation">
+              <a href="index.html">
+                <span aria-hidden="true">⌂</span>Home</a>
+              <a href="posts.html">
+                <span aria-hidden="true">✎</span>Daily life</a>
+              <a href="blog.html" aria-current="page">
+                <span aria-hidden="true">❧</span>Blog & stories</a>
+              <a href="documents.html">
+                <span aria-hidden="true">▤</span>Documents</a>
+              <a href="work.html">
+                <span aria-hidden="true">☑</span>Work</a>
+              <a href="utilities.html">
+                <span aria-hidden="true">⚒</span>Utilities</a>
+              <a href="anime.html">
+                <span aria-hidden="true">☆</span>Anime log</a>
+              <a href="novels.html">
+                <span aria-hidden="true">♧</span>Reading room</a>
+              <a href="archive.html">
+                <span aria-hidden="true">↺</span>Archive</a>
+            </nav>
+          </section>
+          <section class="paper profile">
+            <img class="avatar" src="../assets/images/Philine-P5V6.webp" alt="Philine’s illustrated avatar">
+            <h2>Hello, I’m <span data-profile="name">Philine</span>.</h2>
+            <p data-profile="bio">A collector of stories, little moments, and things worth keeping.</p>
+            <span class="tag">✿ <span data-profile="status">Putting my little world back together</span>
+            </span>
+            <p class="muted">This is my little digital home.</p>
+            <button hidden data-owner-only class="small" data-action="profile">Edit my corner</button>
+          </section>
+          <section class="paper note">
+            <h3>A note to self</h3>
+            <p>A website doesn’t have to be finished to feel like home.</p>
+          </section>
+          <section class="paper tiny-card">
+            <div class="paper-title">little paths <span>↗</span>
+            </div>
+            <div class="tiny-links">
+              <a href="posts.html">✎ Letters from everyday life</a>
+              <a href="novels.html">♧ Get lost in a book</a>
+              <a href="archive.html">↺ Watch this place grow</a>
+            </div>
+            <div class="badge-row">
+              <span class="web-badge">HANDMADE<br>WITH LOVE</span>
+              <span class="web-badge pink">SMALL WEB<br>BIG HEART</span>
+            </div>
+            <small>Best enjoyed at your own pace.</small>
+          </section>
+        </aside>
+        <!-- PAGE CONTENT: edit this page’s headings and sections below. -->
+        <main id="main" class="column wide" tabindex="-1">
+          <div class="page-heading">
+            <div>
+              <div class="eyebrow">A page in my picture book</div>
+              <h2>Ink & imagination</h2>
+              <p class="muted">Longer thoughts, unfinished stories, and words finding their way.</p>
+            </div>
+            <button hidden data-owner-only class="primary" data-action="new-blog">+ Write something</button>
+          </div>
+          <div class="toolbar">
+            <input id="entry-search" type="search" aria-label="Search entries" placeholder="Look for a thought…">
+            <select id="entry-filter" aria-label="Entry type">
+              <option value="">All pages</option>
+              <option>Blog</option>
+              <option>Story</option>
+            </select>
+          </div>
+          <div class="column" id="entries">
+            <!-- Repeated records are cloned from templates/components.html. -->
+            <div class="empty">
+              <span class="symbol" aria-hidden="true">✎</span>
+              <h3>A blank page is a beginning</h3>
+              <p>Your words belong here. Start with one little thought.</p>
+              <button hidden data-owner-only data-action="new-blog">Write the first page</button>
+            </div>
+          </div>
+        </main>
+      </div>
+      <footer class="footer">
+        <span>Made with care, a few loose threads, and a lot of heart. ♡</span>
+        <span data-owner-only hidden><button data-owner-only data-action="logout" hidden>Sign out</button> · <button hidden data-owner-only data-action="backup">Backup & import</button><button data-owner-only data-action="trash" hidden>Trash</button></span>
+        <span>
+          <a href="../README.md">Readme</a> · <a href="../docs/PROJECT-REPORT.md">Site report</a>
+        </span>
+      </footer>
+    </div>
+    <dialog id="editor" aria-label="Notebook editor"></dialog>
+    <div id="toast" role="status">
+    </div>
+    <noscript>Interactive notebook features need JavaScript. <a href="../README.md">Read the project guide</a>.</noscript>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "philine-picturebook",
+  "version": "2.3.1",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env scripts/serve.mjs",
+    "db:migrate": "node --env-file-if-exists=.env scripts/migrate.mjs",
+    "db:owner": "node --env-file-if-exists=.env scripts/owner.mjs",
+    "test": "node tests/check.mjs && node tests/request-body.mjs && node tests/database.mjs && node tests/music-api.mjs && node --experimental-vm-modules tests/novel-reader.mjs && node tests/reading-position.mjs && node tests/reader-speech.mjs"
+  },
+  "dependencies": {
+    "dompurify": "^3.4.17",
+    "fflate": "^0.8.3",
+    "pdfjs-dist": "^6.5.438",
+    "pg": "^8.23.1"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.15",
+    "jsdom": "^31.0.0"
+  }
+}
