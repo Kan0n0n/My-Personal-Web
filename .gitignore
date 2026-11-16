@@ -5,3 +5,6 @@ node_modules/
 backups/
 test-results/
 *.log
+dist/
+playwright-report/
+.migration-baseline/

@@ -1,6 +1,5 @@
 <!doctype html>
-<html lang="en">
-<head>
+<html lang="en"><head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="../assets/images/Philine-P5V6.webp">
@@ -11,61 +10,4 @@
   <link rel="stylesheet" href="../assets/css/legacy/utilities.css">
   <link rel="stylesheet" href="../assets/css/legacy-tool.css">
 </head>
-<body class="legacy-tool">
-  <a class="skip" href="#main">Skip to the tool</a>
-  <div class="tool-wrap">
-    <nav class="tool-nav" aria-label="Picture Book navigation"><a href="index.html">← Picture Book</a><a href="utilities.html">All utilities</a><a href="../docs/PROJECT-REPORT.md">Site report</a></nav>
-    <header class="masthead">
-      <div class="eyebrow">A little experiment from the original site</div>
-      <h1><a class="wordmark" href="index.html" aria-label="Philine’s Picture Book — home"><span class="wordmark-name" aria-hidden="true"><span class="logo-char" style="--order:0">P</span><span class="logo-char" style="--order:1">h</span><span class="logo-char" style="--order:2">i</span><span class="logo-char" style="--order:3">l</span><span class="logo-char" style="--order:4">i</span><span class="logo-char" style="--order:5">n</span><span class="logo-char" style="--order:6">e</span><span class="logo-suffix">’s</span></span><span class="wordmark-book" aria-hidden="true">Picture Book</span></a></h1>
-      <p>AI2D Relation Extractor<br>Diagrams, connections, and little discoveries.</p>
-      <a class="mascot-link" href="index.html" aria-label="Return home"><img class="mascot" src="../assets/images/rzmcsb_trans_rel.png" alt="A book-loving character with a walking book"></a>
-    </header>
-    <p class="backend-note">Analysis needs the original backend at <code>localhost:5000/api/analyze</code>. That server was not part of the recovered files. Graphs also need the external vis-network library.</p>
-    <main id="main" class="paper" tabindex="-1">
-      <section class="utility-panel active" id="ai2d-rel-extract">
-        <div class="paper-title">AI2D Relation Extractor <span>✿</span></div>
-        <div class="ai2d-controls">
-          <label for="imageInput" class="custom-file-upload" id="fileLabel">↑ Choose Image</label>
-          <input type="file" id="imageInput" accept="image/png,image/jpeg">
-          <button id="analyzeButton" class="ai2d-analyze-btn" onclick="processDiagram()">✧ Analyze Diagram</button>
-        </div>
-        <p id="status" class="ai2d-status" role="status"></p>
-        <div class="ai2d-results-grid" id="image-gallery"></div>
-      </section>
-    </main>
-    <div id="zoomModal" class="modal" role="dialog" aria-modal="true" aria-label="Enlarged diagram" tabindex="-1">
-      <button class="close" id="closeZoom" aria-label="Close enlarged diagram">×</button>
-      <div class="modal-content-container"><img class="modal-content-image" id="zoomedImg" alt="Enlarged analysis result"><pre class="modal-content-text" id="zoomedText"></pre></div>
-    </div>
-  </div>
-  <!-- Result markup lives here so the JavaScript only fills in returned data. -->
-  <template id="ai2d-loading-template">
-    <div class="loading-container">
-      <img src="../assets/images/loading.gif" alt="Loading..." class="loading-gif">
-      <span class="loading-text">Analyzing image... (this might take a minute)</span>
-    </div>
-  </template>
-  <template id="ai2d-image-template">
-    <div class="ai2d-result-card">
-      <h4></h4>
-      <a target="_blank" rel="noopener"><img alt=""></a>
-    </div>
-  </template>
-  <template id="ai2d-json-template">
-    <div class="ai2d-json-card">
-      <h4>Final JSON Data</h4>
-      <pre id="json-output"></pre>
-      <button class="json-download-btn" onclick="downloadJSON()">↓ Download JSON</button>
-    </div>
-  </template>
-  <template id="ai2d-graph-template">
-    <div class="ai2d-result-card interactive-graph-card">
-      <h4>Interactable Scene Graph</h4>
-      <div id="mynetwork"></div>
-    </div>
-  </template>
-  <script src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
-  <script src="../assets/js/ai2d.js"></script>
-</body>
-</html>
+<body class="legacy-tool"><div id="root"></div><script type="module" src="/frontend/main.jsx"></script></body></html>

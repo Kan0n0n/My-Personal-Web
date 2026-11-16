@@ -40,6 +40,7 @@ try {
   if (major<22||(major===22&&minor<13)) throw Error('Install Node.js 22.13 or newer.');
   if (!existsSync('.env')) throw Error('Complete the one-time setup in docs/DATABASE-SETUP.md first: .env is missing.');
   if (!existsSync('node_modules/pg/package.json')) throw Error('Run npm ci once in this folder, then reopen this launcher.');
+  if (!existsSync('dist/pages/index.html')) throw Error('Build the frontend first: run npm run build in this folder, then reopen the launcher.');
   const {configuration}=await import('./serve.mjs');
   const config=configuration();
   const db=new URL(process.env.DATABASE_URL);

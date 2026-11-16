@@ -1,5 +1,5 @@
-import {unzipSync, strFromU8} from '../vendor/fflate.mjs';
-import DOMPurify from '../vendor/purify.mjs';
+import {unzipSync, strFromU8} from 'fflate';
+import DOMPurify from 'dompurify';
 
 const $=(selector,root)=>root.querySelector(selector);
 function xml(bytes,label) {
@@ -188,8 +188,8 @@ export async function loadBookCover(book) {
     return new Blob([files[file]],{type:mime});
   }
   if(book.format==='pdf') {
-    const lib=await import('../vendor/pdf.mjs');
-    lib.GlobalWorkerOptions.workerSrc=new URL('../vendor/pdf.worker.mjs',import.meta.url).href;
+    const lib=await import('pdfjs-dist/build/pdf.mjs');
+    lib.GlobalWorkerOptions.workerSrc='/assets/vendor/pdf.worker.mjs';
     const task=lib.getDocument({data:bytes,isEvalSupported:false,enableXfa:false,cMapUrl:'/assets/vendor/pdfjs/cmaps/',cMapPacked:true,standardFontDataUrl:'/assets/vendor/pdfjs/standard_fonts/',wasmUrl:'/assets/vendor/pdfjs/wasm/'});
     try {
       const pdf=await task.promise,page=await pdf.getPage(1),base=page.getViewport({scale:1});
@@ -215,10 +215,10 @@ export async function openFormatReader({book,container,root,saved,isCurrent}) {
   const destroy=()=>{destroyed=true;renderTask?.cancel();task?.destroy()?.catch(()=>{});};
   try {
     if (book.format==='pdf') {
-      const lib=await import('../vendor/pdf.mjs');
+      const lib=await import('pdfjs-dist/build/pdf.mjs');
       pdfLib=lib;
       if (!alive()) return {destroy};
-      lib.GlobalWorkerOptions.workerSrc=new URL('../vendor/pdf.worker.mjs',import.meta.url).href;
+      lib.GlobalWorkerOptions.workerSrc='/assets/vendor/pdf.worker.mjs';
       task=lib.getDocument({data:bytes,isEvalSupported:false,enableXfa:false,cMapUrl:'/assets/vendor/pdfjs/cmaps/',cMapPacked:true,standardFontDataUrl:'/assets/vendor/pdfjs/standard_fonts/',wasmUrl:'/assets/vendor/pdfjs/wasm/'});
       pdf=await task.promise;
       count=pdf.numPages;

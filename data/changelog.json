@@ -1,5 +1,18 @@
 [
   {
+    "version": "3.0.0",
+    "date": "2026-11-17",
+    "title": "The same picture book, rebuilt with React",
+    "changes": [
+      "Migrated all page rendering, forms, widgets, library and extractor UI to React while preserving the original decorative theme.",
+      "Added Vite and prefixed Tailwind utilities without a global styling reset.",
+      "Moved API routing to Express while retaining PostgreSQL services, authentication, validation and revision-safe saves.",
+      "Added browser workflow and visual comparison checks, production builds and same-origin development.",
+      "Rewrote the README as a short introduction and moved setup material to development documentation."
+    ],
+    "notes": "docs/versions/2026-11-17-react-migration.md"
+  },
+  {
     "version": "2.3.1",
     "date": "2026-11-16",
     "title": "Reliable saves and a smaller request reader",

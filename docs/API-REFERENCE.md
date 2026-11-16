@@ -1,5 +1,7 @@
 # PostgreSQL application reference
 
+Version 3 frontend/HTTP update, 17 November 2026: React sources live in `frontend/`, Vite builds `dist/`, and Express dispatches the existing API endpoints. Data-service modules and SQL contracts below remain in use. Raw uploads retain bounded readers; development uses the same origin as the API. See [development and operations](DEVELOPMENT.md) and [migration verification](versions/2026-11-17-react-migration.md) for current commands and tests. Historical frontend file references below are superseded.
+
 Version 2.0.0 · 6 November 2026. This supersedes the browser-storage contracts in the version-1 code reference/report. The [database design](DATABASE-DESIGN.md) remains the model rationale; the SQL migration and this document describe implemented behaviour.
 
 ## Modules

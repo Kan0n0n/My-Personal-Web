@@ -1,6 +1,6 @@
 # React, Node.js and Tailwind migration execution plan
 
-Status: stack selected by the owner; implementation not started, 16 November 2026. No framework has been installed or application behavior changed by this plan. Baseline: version 2.3.1, a personal site with one owner, occasional visitors, and one Node.js server. This replaces the earlier Vue proposal.
+Status: implemented on the separate `test/react-node-tailwind` branch, 17 November 2026. See [version 3 implementation and verification](versions/2026-11-17-react-migration.md). The original checklist below records the intended scope; the release notes distinguish completed checks from remaining real-device/external-service checks. Baseline: version 2.3.1, a personal site with one owner, occasional visitors, and one Node.js server.
 
 ## Recommendation and purpose
 

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {JSDOM} from 'jsdom';
 import {createSpeechReader} from '../assets/js/reader-speech.mjs';
-const templates=await readFile(new URL('../templates/components.html',import.meta.url),'utf8');
+const templates=await readFile(new URL('./fixtures/reader.html',import.meta.url),'utf8');
 const local={voiceURI:'local-en',name:'Device English',lang:'en-US',localService:true,default:true};
 const remote={voiceURI:'remote',name:'Online voice',lang:'en-US',localService:false};
 let checks=0;

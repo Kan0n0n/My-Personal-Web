@@ -11,7 +11,7 @@ import {samplePDF,sampleEPUB} from './fixtures/books.mjs';
 Object.assign(globalThis,{DOMMatrix,ImageData,Path2D});
 const pdf=await import('pdfjs-dist/legacy/build/pdf.mjs');
 const source=await readFile(new URL('../assets/js/novel-formats.mjs',import.meta.url),'utf8');
-const templates=await readFile(new URL('../templates/components.html',import.meta.url),'utf8');
+const templates=await readFile(new URL('./fixtures/reader.html',import.meta.url),'utf8');
 let checks=0;
 export async function open(format,saved={},fileBytes) {
   const dom=new JSDOM('<main id="reader"></main>'+templates,{url:'http://127.0.0.1:4173/pages/novels.html'});
@@ -158,45 +158,4 @@ assert.equal((await fallbackArt.module.loadBookCover({id:'fixture',format:'epub'
 const pdfArt=await open('pdf');
 const thumbnail=await pdfArt.module.loadBookCover({id:'fixture',format:'pdf'});
 assert.equal(thumbnail.type,'image/png');assert.ok(thumbnail.size>0);close(pdfArt);checks++;
-const novelPage=await readFile(new URL('../pages/novels.html',import.meta.url),'utf8');
-const mainSource=await readFile(new URL('../assets/js/picturebook.js',import.meta.url),'utf8');
-const mainDOM=new JSDOM(novelPage,{url:'http://127.0.0.1:4173/pages/novels.html'});
-const mainWindow=mainDOM.window;mainWindow.scrollTo=()=>{};
-const spokenInReader=[];
-const mainSpeech=new mainWindow.EventTarget();mainSpeech.getVoices=()=>[{voiceURI:'local-reader',name:'Reader voice',lang:'en-US',localService:true,default:true}];
-mainSpeech.speak=utterance=>spokenInReader.push(utterance);mainSpeech.cancel=()=>{};mainWindow.speechSynthesis=mainSpeech;
-mainWindow.SpeechSynthesisUtterance=class{constructor(text){this.text=text;}};
-const templateHost=mainWindow.document.createElement('div');templateHost.innerHTML=templates;mainWindow.document.body.append(templateHost);
-let savedPosition;
-const mainContext=vm.createContext({window:mainWindow,document:mainWindow.document,location:mainWindow.location,navigator:mainWindow.navigator,structuredClone,URL,Blob,AbortSignal,FormData:mainWindow.FormData,
-  setTimeout,clearTimeout,setInterval,requestAnimationFrame:callback=>callback(),
-  fetch:async(path,options={})=>({ok:true,json:async()=>{
-    if(path.endsWith('/content'))return {text:'A little novel for testing font preferences and reading positions.'};
-    if(path.endsWith('/progress')){savedPosition={...JSON.parse(options.body),revision:(savedPosition?.revision||0)+1};return savedPosition;}
-    return {};
-  }})});
-const mainScript=new vm.Script(mainSource.replace(/\ninit\(\);\s*$/,'\n'),{importModuleDynamically:specifier=>specifier.includes('reader-speech')?import('../assets/js/reader-speech.mjs'):import('../assets/js/reading-position.mjs')});
-mainScript.runInContext(mainContext);
-vm.runInContext('authenticated=true;books=[{id:"text-book",title:"Text book",format:"txt",revision:1}];',mainContext);
-await vm.runInContext('readBook("text-book")',mainContext);
-const family=mainWindow.document.querySelector('#reader-font');family.value='verdana';await family.onchange({target:family});
-const alignment=mainWindow.document.querySelector('#reader-alignment');
-for(const value of ['left','center','right','justify']){alignment.value=value;await alignment.onchange({target:alignment});assert.equal(mainWindow.document.querySelector('.reader-text').style.textAlign,value);}
-await vm.runInContext('readingSession.saveNow()',mainContext);
-assert.equal(savedPosition.fontFamily,'verdana');
-assert.equal(savedPosition.alignment,'justify');
-assert.match(mainWindow.document.querySelector('.reader-text').style.fontFamily,/Verdana/);
-assert.equal(mainWindow.document.querySelector('.masthead').style.fontFamily,'');
-assert.equal(mainWindow.document.querySelector('#book-template').content.querySelector('.book-rename'),null);
-assert.equal(spokenInReader.length,0);
-const speechRate=mainWindow.document.querySelector('#speech-rate');speechRate.value='1.25';speechRate.onchange();
-await mainWindow.document.querySelector('#speech-play').onclick();
-spokenInReader[0].onboundary({name:'word',charIndex:9,charLength:5});
-await vm.runInContext('readingSession.saveNow()',mainContext);
-assert.equal(savedPosition.anchor.offset,9);assert.equal(savedPosition.speech.voiceURI,'local-reader');assert.equal(savedPosition.speech.rate,1.25);
-await vm.runInContext('readBook("text-book")',mainContext);
-assert.equal(mainWindow.document.querySelector('#reader-font').value,'verdana');
-assert.equal(mainWindow.document.querySelector('#reader-alignment').value,'justify');
-assert.equal(mainWindow.document.querySelector('#speech-rate').value,'1.25');assert.equal(spokenInReader.length,1);
-await vm.runInContext('closeBookReader()',mainContext);mainWindow.close();checks++;
 console.log(`${checks} PDF/EPUB reader scenarios passed (DOM environment and actual PDF rendering).`);

@@ -1,6 +1,6 @@
 # Future update plan
 
-16 November 2026: see the [React, Node.js and Tailwind migration execution plan](FRAMEWORK-MIGRATION-PLAN.md) for the selected React/Vite, gradual Tailwind and Node.js/Express stack. It covers every page, API routes, reader lifecycle, Windows startup, visual preservation and rollback checks. Implementation has not started. The historical phases below are not a current implementation checklist.
+17 November 2026: the React/Vite, Tailwind and Node.js/Express migration is implemented on `test/react-node-tailwind`. See the [execution plan](FRAMEWORK-MIGRATION-PLAN.md) and [version 3 verification notes](versions/2026-11-17-react-migration.md). The historical phases below are not a current implementation checklist.
 
 Status, 6 November 2026: version 2.0.0 implements PostgreSQL persistence, owner authentication, publishing, trash, and transactional empty-account import. See [current contracts and remaining limits](API-REFERENCE.md). The original phases below predate this implementation. Native database setup, deployment, and browser verification remain environment tasks.
 

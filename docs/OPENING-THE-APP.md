@@ -2,6 +2,8 @@
 
 ## Each time you reopen the app
 
+For version 3, install the locked dependencies and run `npm run build` after updating source files, before opening the launcher. This generates the React frontend in `dist/`; the launcher reports missing build output. See [development and operations](DEVELOPMENT.md) for developer commands.
+
 Double-click **Start Picture Book.cmd** in the project folder. You can right-click it and create a desktop shortcut for easier access.
 
 The launcher uses the settings in `.env`, starts Docker Desktop if your local Compose database needs it, starts PostgreSQL, checks database/schema access, starts Node.js, and opens the home page. Docker can take about two minutes after a reboot. If the website is already running, the launcher opens it again without starting a second copy.

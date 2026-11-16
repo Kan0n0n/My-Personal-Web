@@ -1,5 +1,7 @@
 # Editing the site in ordinary HTML
 
+Version 3 update: page markup is now rendered by React in `frontend/views.jsx` and reusable fields/reader markup in `frontend/templates.jsx`. Edit those components instead of generated `dist/` files. Original decorative CSS and artwork remain under `assets/`. The older HTML/template workflow below is historical. See [development and operations](DEVELOPMENT.md).
+
 Since version 1.2.0, the layouts are written directly in the HTML files. JavaScript does not generate or replace entire pages. No build or template compilation is needed.
 
 ## Where to change things
