@@ -171,13 +171,13 @@ main.wide { grid-column: 2 / 4; }
 .directory { padding: 10px; }
 .directory .paper-title { justify-content: flex-end; }
 .navigation { display: flex; flex-direction: column; gap: 0; }
-.navigation a { position: relative; padding: 7px 20px 7px 10px; border: 1px dotted #ccb4a2; border-top: 0; background: linear-gradient(#fffdfa 20%, #e7edcf); text-decoration: none; font-size: 12px; letter-spacing: 1px; }
+.navigation a { position: relative; isolation: isolate; padding: 7px 20px 7px 10px; border: 1px dotted #ccb4a2; border-top: 0; background: linear-gradient(#fffdfa 20%, #e7edcf); text-decoration: none; font-size: 12px; letter-spacing: 1px; }
 .navigation a:first-child { border-top: 1px solid var(--line); }
 .navigation a:nth-child(n + 5) { background: linear-gradient(#fffdfa 20%, #f4dfe0); }
 .navigation a:nth-child(n + 8) { background: linear-gradient(#fffdfa 20%, #dfeff0); }
 .navigation a:hover, .navigation a[aria-current='page'] { background: #e8efd4; color: #566c3f; }
-.navigation a[aria-current='page']::before { content: ''; position: absolute; right: -1px; top: 5px; bottom: 5px; width: 3px; border-radius: 999px; background: #fff; pointer-events: none; }
-.navigation a[aria-current='page']::after { content: ''; position: absolute; right: -1px; top: 50%; width: 10px; height: 18px; border-radius: 999px 0 0 999px; transform: translateY(-50%); background: #fff; pointer-events: none; }
+.navigation a[aria-current='page']::before { content: ''; position: absolute; z-index: -1; right: -1px; top: 0; bottom: 0; width: 50%; border-radius: 999px 0 0 999px; background: linear-gradient(90deg, transparent, #ffffff66 35%, #fff); pointer-events: none; }
+.navigation a[aria-current='page']::after { content: ''; position: absolute; z-index: -1; right: 0; top: 50%; width: 48%; height: 20px; transform: translateY(-50%); background: radial-gradient(circle at 5px 50%, #fff 0 2px, #ffffff55 3px, transparent 5px) 0 0 / 22px 100% repeat-x; mask-image: linear-gradient(90deg, transparent, #000 20%, #000 85%, transparent); filter: drop-shadow(0 0 3px #fff) drop-shadow(0 0 1px #a6b57f); pointer-events: none; }
 .navigation a span { display: inline-block; width: 21px; }
 .profile { text-align: center; padding: 15px 12px; }
 .avatar { width: 85px; height: 95px; object-fit: cover; object-position: 50% 20%; padding: 3px; border: 1px solid var(--line); background: #fff8ea; transition: transform .25s ease; }

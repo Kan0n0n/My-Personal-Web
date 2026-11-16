@@ -11,6 +11,12 @@
 }
 .mascot-link:is(:hover, :focus-visible) .mascot { transform: scale(1.13) rotate(-3deg); }
 .avatar:hover { transform: scale(1.06); }
+.navigation a[aria-current='page']::after { animation: directory-dots 3.5s linear infinite; }
+@keyframes directory-dots {
+  0% { background-position: 22px 0; opacity: .6; }
+  50% { opacity: 1; }
+  100% { background-position: 0 0; opacity: .6; }
+}
 /* Only offscreen cards receive these attributes; the first screen stays steady. */
 [data-scroll-reveal='waiting'] { opacity: 0; transform: translateY(22px); }
 [data-scroll-reveal='visible'] { animation: widget-rise .55s cubic-bezier(.2,.65,.3,1) backwards; }

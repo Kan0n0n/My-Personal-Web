@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { sampleEPUB, samplePDF } from "../fixtures/books.mjs";
 import { existsSync } from "node:fs";
 import { createCanvas, loadImage } from "@napi-rs/canvas";
-test("rounded white selection marker and one-time scroll reveals", async ({
+test("glowing dotted selection marker and one-time scroll reveals", async ({
   page,
 }, info) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
@@ -10,19 +10,32 @@ test("rounded white selection marker and one-time scroll reveals", async ({
   const current = page.locator('.navigation [aria-current="page"]');
   await expect(current).toHaveCount(1);
   const marker = await current.evaluate((node) => ({
-    line: getComputedStyle(node, "::before").backgroundColor,
+    blend: getComputedStyle(node, "::before").backgroundImage,
+    width:
+      parseFloat(getComputedStyle(node, "::before").width) / node.clientWidth,
     edge: getComputedStyle(node, "::before").right,
-    center: getComputedStyle(node, "::after").borderTopLeftRadius,
+    dots: getComputedStyle(node, "::after").backgroundImage,
+    animation: getComputedStyle(node, "::after").animationName,
     shadow: getComputedStyle(node).boxShadow,
     text: getComputedStyle(node, "::after").content,
   }));
-  expect(marker).toEqual({
-    line: "rgb(255, 255, 255)",
-    edge: "-1px",
-    center: "999px",
-    shadow: "none",
-    text: '""',
-  });
+  expect(marker.blend).toContain("linear-gradient");
+  expect(marker.blend).toContain("rgb(255, 255, 255)");
+  expect(marker.width).toBeCloseTo(0.5, 1);
+  expect(marker.dots).toContain("radial-gradient");
+  expect(marker.animation).toBe("directory-dots");
+  expect(marker.shadow).toBe("none");
+  expect(marker.text).toBe('""');
+  const start = await current.evaluate(
+    (node) => getComputedStyle(node, "::after").backgroundPositionX,
+  );
+  await expect
+    .poll(() =>
+      current.evaluate(
+        (node) => getComputedStyle(node, "::after").backgroundPositionX,
+      ),
+    )
+    .not.toBe(start);
   await page
     .locator(".directory")
     .screenshot({ path: info.outputPath("directory.png") });
@@ -48,6 +61,13 @@ test("rounded white selection marker and one-time scroll reveals", async ({
   await target.scrollIntoViewIfNeeded();
   await expect(target).toHaveAttribute("data-animation-starts", "1");
   await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect
+    .poll(() =>
+      current.evaluate(
+        (node) => getComputedStyle(node, "::after").animationName,
+      ),
+    )
+    .toBe("none");
   await expect(page.locator("[data-scroll-reveal]")).toHaveCount(0);
   await page.reload();
   await expect(page.locator(".masthead")).toBeVisible();
