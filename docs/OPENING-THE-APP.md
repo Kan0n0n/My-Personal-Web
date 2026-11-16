@@ -16,6 +16,8 @@ Installation, configuring `.env`, migrations, grants, and creating the owner acc
 
 If startup fails, its window stays open with a message. Start Docker Desktop manually if it asks for setup, an update, or WSL configuration, then retry. The automatic database startup targets only this project's local `picturebook` database on port 5432; other database configurations must be started separately.
 
+After a code update, restart an already running launcher with Ctrl+C before reopening it. Refreshing the browser does not restart Node.js. The launcher checks that the running server serves the current built page and its JavaScript assets, and reports an outdated server rather than reopening a blank page.
+
 For terminal use:
 
 ```powershell

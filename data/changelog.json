@@ -1,5 +1,15 @@
 [
   {
+    "version": "3.0.1",
+    "date": "2026-11-17",
+    "title": "Check the frontend before opening the app",
+    "changes": [
+      "Detect outdated running servers that serve source HTML instead of the built React page.",
+      "Verify the home page and its JavaScript assets during startup before opening the browser."
+    ],
+    "notes": "docs/versions/2026-11-17-launcher-readiness.md"
+  },
+  {
     "version": "3.0.0",
     "date": "2026-11-17",
     "title": "The same picture book, rebuilt with React",

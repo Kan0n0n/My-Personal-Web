@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {frontendReady} from '../scripts/frontend-check.mjs';
+const built='<div id="root"></div><script type="module" src="/assets/main-test.js"></script>';
+const fetcher=(html,status=200,type='text/javascript')=>async url=>url.pathname.endsWith('.html')?new Response(html):new Response('export {};',{status,headers:{'content-type':type}});
+assert.equal(await frontendReady('http://localhost',built,fetcher(built)),true);
+assert.equal(await frontendReady('http://localhost',built,fetcher('<script src="/frontend/main.jsx"></script>')),false);
+assert.equal(await frontendReady('http://localhost',built,fetcher(built,404)),false);
+assert.equal(await frontendReady('http://localhost',built,fetcher(built,200,'text/html')),false);
+assert.equal(await frontendReady('http://localhost','<div id="root"></div>',fetcher('<div id="root"></div>')),false);
+const external='<script src="https://other.invalid/assets/app.js"></script>';
+assert.equal(await frontendReady('http://localhost',external,fetcher(external)),false);
+console.log('6 launcher frontend-readiness scenarios passed.');

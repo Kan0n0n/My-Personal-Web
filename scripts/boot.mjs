@@ -1,4 +1,6 @@
 import {existsSync} from 'node:fs';
+import {readFile} from 'node:fs/promises';
+import {frontendReady} from './frontend-check.mjs';
 import {spawn, spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
@@ -49,6 +51,8 @@ try {
   const host=process.env.HOST||'127.0.0.1', port=Number(process.env.PORT||4173);
   const connectHost=['0.0.0.0','::'].includes(host)?'127.0.0.1':host;
   const page=`${config.origin}/pages/index.html`;
+  const localOrigin=`http://${connectHost.includes(':')?`[${connectHost}]`:connectHost}:${port}`;
+  const expectedHTML=await readFile('dist/pages/index.html','utf8');
   if (checkOnly) {
     console.log(`Startup configuration OK. Database: ${db.hostname}:${db.port||5432}${db.pathname}.`);
     console.log(`Browser: ${page}. Local Compose auto-start: ${localDB?'yes':'no'}.`);
@@ -73,6 +77,7 @@ try {
       const response=await fetch(`http://${connectHost.includes(':')?`[${connectHost}]`:connectHost}:${port}/api/public/notebook`,{signal:AbortSignal.timeout(5000)});
       const data=await response.json().catch(()=>null);
       if (!response.ok||!data||!Object.hasOwn(data,'profile')||!Array.isArray(data.posts)) throw Error(`Port ${port} is occupied. Close that program or check the existing app.`);
+      if (!await frontendReady(localOrigin,expectedHTML)) throw Error(`An outdated Picture Book server or build is running on port ${port}. Stop its launcher with Ctrl+C, then reopen Start Picture Book.cmd.`);
       console.log(`Picture Book is already running: ${page}`);
       openBrowser(page);
     } else {
@@ -84,7 +89,7 @@ try {
       process.on('SIGTERM',()=>server.kill('SIGTERM'));
       await waitFor(async()=>{
         if (server.exitCode!==null) throw Error('The app stopped during startup. Read the server message above.');
-        try { const r=await fetch(`http://${connectHost.includes(':')?`[${connectHost}]`:connectHost}:${port}/api/public/notebook`,{signal:AbortSignal.timeout(1500)}); return r.ok; }
+        try { const r=await fetch(`${localOrigin}/api/public/notebook`,{signal:AbortSignal.timeout(1500)}); return r.ok && await frontendReady(localOrigin,expectedHTML); }
         catch { return false; }
       },30,'The app did not become ready within 30 seconds.');
       console.log(`Ready: ${page}`); openBrowser(page);
