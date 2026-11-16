@@ -171,12 +171,13 @@ main.wide { grid-column: 2 / 4; }
 .directory { padding: 10px; }
 .directory .paper-title { justify-content: flex-end; }
 .navigation { display: flex; flex-direction: column; gap: 0; }
-.navigation a { padding: 7px 10px; border: 1px dotted #ccb4a2; border-top: 0; background: linear-gradient(#fffdfa 20%, #e7edcf); text-decoration: none; font-size: 12px; letter-spacing: 1px; }
+.navigation a { position: relative; padding: 7px 20px 7px 10px; border: 1px dotted #ccb4a2; border-top: 0; background: linear-gradient(#fffdfa 20%, #e7edcf); text-decoration: none; font-size: 12px; letter-spacing: 1px; }
 .navigation a:first-child { border-top: 1px solid var(--line); }
 .navigation a:nth-child(n + 5) { background: linear-gradient(#fffdfa 20%, #f4dfe0); }
 .navigation a:nth-child(n + 8) { background: linear-gradient(#fffdfa 20%, #dfeff0); }
-.navigation a:hover, .navigation a[aria-current='page'] { background: #e8efd4; color: #566c3f; box-shadow: inset 3px 0 #879a62; }
-.navigation a[aria-current='page']::after { content: ' «'; }
+.navigation a:hover, .navigation a[aria-current='page'] { background: #e8efd4; color: #566c3f; }
+.navigation a[aria-current='page']::before { content: ''; position: absolute; right: -1px; top: 5px; bottom: 5px; width: 3px; border-radius: 999px; background: #fff; pointer-events: none; }
+.navigation a[aria-current='page']::after { content: ''; position: absolute; right: -1px; top: 50%; width: 10px; height: 18px; border-radius: 999px 0 0 999px; transform: translateY(-50%); background: #fff; pointer-events: none; }
 .navigation a span { display: inline-block; width: 21px; }
 .profile { text-align: center; padding: 15px 12px; }
 .avatar { width: 85px; height: 95px; object-fit: cover; object-position: 50% 20%; padding: 3px; border: 1px solid var(--line); background: #fff8ea; transition: transform .25s ease; }

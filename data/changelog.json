@@ -1,5 +1,15 @@
 [
   {
+    "version": "3.1.0",
+    "date": "2026-11-17",
+    "title": "A softer directory and scrolling widgets",
+    "changes": [
+      "Added a white right-edge current-page indicator with a rounded center.",
+      "Added gentle one-time slide-up reveals for offscreen widgets and cards, respecting reduced motion and keyboard focus."
+    ],
+    "notes": "docs/versions/2026-11-17-navigation-motion.md"
+  },
+  {
     "version": "3.0.1",
     "date": "2026-11-17",
     "title": "Check the frontend before opening the app",

@@ -2,7 +2,59 @@ import { test, expect } from "@playwright/test";
 import { sampleEPUB, samplePDF } from "../fixtures/books.mjs";
 import { existsSync } from "node:fs";
 import { createCanvas, loadImage } from "@napi-rs/canvas";
+test("rounded white selection marker and one-time scroll reveals", async ({
+  page,
+}, info) => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/pages/index.html");
+  const current = page.locator('.navigation [aria-current="page"]');
+  await expect(current).toHaveCount(1);
+  const marker = await current.evaluate((node) => ({
+    line: getComputedStyle(node, "::before").backgroundColor,
+    edge: getComputedStyle(node, "::before").right,
+    center: getComputedStyle(node, "::after").borderTopLeftRadius,
+    shadow: getComputedStyle(node).boxShadow,
+    text: getComputedStyle(node, "::after").content,
+  }));
+  expect(marker).toEqual({
+    line: "rgb(255, 255, 255)",
+    edge: "-1px",
+    center: "999px",
+    shadow: "none",
+    text: '""',
+  });
+  await page
+    .locator(".directory")
+    .screenshot({ path: info.outputPath("directory.png") });
+  const widget = page.locator('[data-scroll-reveal="waiting"]').first();
+  await expect(widget).toBeAttached();
+  await widget.evaluate((node) => {
+    node.id = "reveal-test";
+    node.dataset.animationStarts = "0";
+    node.addEventListener(
+      "animationstart",
+      () =>
+        (node.dataset.animationStarts = String(
+          Number(node.dataset.animationStarts) + 1,
+        )),
+    );
+  });
+  const target = page.locator("#reveal-test");
+  await target.scrollIntoViewIfNeeded();
+  await expect(target).toHaveAttribute("data-scroll-reveal", "visible");
+  await expect(target).toHaveCSS("opacity", "1");
+  await expect(target).toHaveCSS("transform", "none");
+  await page.evaluate(() => scrollTo(0, 0));
+  await target.scrollIntoViewIfNeeded();
+  await expect(target).toHaveAttribute("data-animation-starts", "1");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(page.locator("[data-scroll-reveal]")).toHaveCount(0);
+  await page.reload();
+  await expect(page.locator(".masthead")).toBeVisible();
+  await expect(page.locator("[data-scroll-reveal]")).toHaveCount(0);
+});
 test("compare home against pre-migration commit", async ({ page }, info) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
   test.skip(
     !existsSync(".migration-baseline/pages/index.html"),
     "Optional baseline source archive is not present.",
@@ -250,7 +302,9 @@ test("library originals, all formats, reader settings and bookmarks survive reop
   await page.getByRole("button", { name: "Save this page" }).click();
   await expect(page.locator("#book-list")).not.toContainText("Document · PDF");
   await page.getByRole("button", { name: "Trash", exact: true }).click();
-  await page.getByRole("combobox", { name: "Section", exact: true }).selectOption("books");
+  await page
+    .getByRole("combobox", { name: "Section", exact: true })
+    .selectOption("books");
   await page.getByRole("button", { name: "Restore", exact: true }).click();
   await page.getByRole("button", { name: "Close dialog" }).click();
   await expect(page.locator("#book-list")).toContainText("Document · PDF");

@@ -38,7 +38,7 @@
   .navigation { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 4px; }
   .navigation a { display: flex; align-items: center; gap: 3px; border: 1px solid #c7b09c; padding: 7px 5px; min-height: 44px; font-size: 12px; letter-spacing: 0; white-space: normal; }
   .navigation a span { width: 16px; flex-shrink: 0; }
-  .navigation a[aria-current='page']::after { content: ''; }
+  .navigation a[aria-current='page'] { padding-right: 17px; }
   main.column { order: 4; }
   .right-column { order: 5; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); }
   .left-column > .calendar-paper { order: 6; }

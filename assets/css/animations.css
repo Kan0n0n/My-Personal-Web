@@ -11,12 +11,21 @@
 }
 .mascot-link:is(:hover, :focus-visible) .mascot { transform: scale(1.13) rotate(-3deg); }
 .avatar:hover { transform: scale(1.06); }
+/* Only offscreen cards receive these attributes; the first screen stays steady. */
+[data-scroll-reveal='waiting'] { opacity: 0; transform: translateY(22px); }
+[data-scroll-reveal='visible'] { animation: widget-rise .55s cubic-bezier(.2,.65,.3,1) backwards; }
+@keyframes widget-rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: none; }
+}
+[data-scroll-reveal]:focus-within { opacity: 1; transform: none; animation: none; }
 /* Touch has no persistent hover; a press gives the same little response. */
 @media (hover: none) {
   .wordmark:active .logo-char { animation: logo-jump .5s ease both; animation-delay: calc(var(--order, 0) * 65ms); }
   .mascot-link:active .mascot { transform: scale(1.1); }
 }
 @media (prefers-reduced-motion: reduce) {
+  [data-scroll-reveal] { opacity: 1 !important; transform: none !important; }
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
   .mascot-link:is(:hover, :focus-visible, :active) .mascot, .avatar:hover { transform: none; }
 }
